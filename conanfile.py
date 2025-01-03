@@ -1,32 +1,44 @@
 from conan import ConanFile
-from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
+from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout, CMakeDeps
 
 
-class redfomatterRecipe(ConanFile):
-    name = "redfomatter"
+class RedFormatterRecipe(ConanFile):
+    name = "redformatter"
     version = "1.0"
     package_type = "application"
 
     # Optional metadata
-    license = "<Put the package license here>"
-    author = "<Put your name here> <And your email here>"
-    url = "<Package recipe repository url here, for issues about the package>"
-    description = "<Description of redfomatter package here>"
-    topics = ("<Put some tag here>", "<here>", "<and here>")
+    license = "MIT"
+    author = "Your Name <your.email@example.com>"
+    url = "https://github.com/your/repo"
+    description = "A description of the RedFormatter package"
+    topics = ("formatter", "redmine", "tool")
 
     # Binary configuration
     settings = "os", "compiler", "build_type", "arch"
-    #generators = "CMakeDeps", "CMakeToolchain"
-    # Sources are located in the same place as this recipe, copy them to the recipe
+    
+    # Sources
     exports_sources = "CMakeLists.txt", "src/*"
 
     def layout(self):
         cmake_layout(self)
 
+    def requirements(self):
+        self.requires("cpprestsdk/2.10.19")
+        self.requires("boost/1.83.0")
+        self.requires("openssl/3.3.2")
+        self.requires("bzip2/1.0.8")
+        self.requires("libiconv/1.17")
+        self.requires("zlib/1.3.1")
+
     def generate(self):
         deps = CMakeDeps(self)
         deps.generate()
+
         tc = CMakeToolchain(self)
+        # 빌드 타입 명확히 전달
+        tc.variables["CMAKE_BUILD_TYPE"] = str(self.settings.build_type)
+        tc.variables["CMAKE_EXPORT_COMPILE_COMMANDS"] = True
         tc.generate()
 
     def build(self):
@@ -38,9 +50,8 @@ class redfomatterRecipe(ConanFile):
         cmake = CMake(self)
         cmake.install()
 
-    def requirements(self):
-        self.requires("cpprestsdk/2.10.19")
-        self.requires("boost/1.83.0")
-        self.requires("openssl/3.3.2")
-
-
+    def package_info(self):
+        self.cpp_info.bindirs = ["bin"]
+        self.cpp_info.libdirs = ["lib"]
+    def configure(self):
+        self.settings.compiler.cppstd = "20"

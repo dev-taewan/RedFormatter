@@ -1,9 +1,25 @@
 {
-    "version": 4,
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 19,
+        "patch": 0
+    },
     "vendor": {
         "conan": {}
     },
     "include": [
-        "build/Release/generators/CMakePresets.json"
+        "build/Debug/generators/CMakePresets.json"
+    ],
+    "configurePresets": [
+        {
+            "name": "debug",
+            "hidden": false,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
     ]
 }
