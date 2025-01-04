@@ -59,23 +59,22 @@ int main()
     std::cout << "size: " << table_data.size() << std::endl;
     auto app = HelloWorld::create();
 
-    auto model = std::make_shared<slint::VectorModel<std::shared_ptr<slint::Model<slint::SharedString>>>>();
-    auto table = TableViewPageAdapter();
+    auto model = std::make_shared<slint::VectorModel<std::shared_ptr<slint::Model<slint::StandardListViewItem>>>>();
     for (const auto &row : table_data)
     {
-        auto shared_row = std::make_shared<slint::VectorModel<slint::SharedString>>();
+        auto shared_row = std::make_shared<slint::VectorModel<slint::StandardListViewItem>>();
         for (const auto &cell : row)
         {
             std::cout << cell << std::endl;
-            shared_row->push_back(slint::SharedString(cell));
+            auto item = slint::StandardListViewItem();
+            item.text = cell;
+            shared_row->push_back(item);
         }
         model->push_back(shared_row);
     }
 
-    // Slint UI에 데이터 전달
-    app->set_table_data(model);
-
-    // 애플리케이션 실행
+    app->set_row_data(model);
+    app->show();
     app->run();
     return 0;
 }
