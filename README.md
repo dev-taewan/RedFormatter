@@ -4,3 +4,6 @@ A tool for automating Redmine issue templates and ensuring consistent formatting
 2025.01.02
 - Apply conan package manager 
 - Testing redmine api with cpprestsdk
+
+2025.01.05
+- Test QML
