@@ -10,4 +10,4 @@ A tool for automating Redmine issue templates and ensuring consistent formatting
 2025.01.6-7
 - QT CREATOR + conan setting ...[fail]
 2025.01.8
-- QT CREATOR + conan setting ...[OK]
+- QT CREATOR + conan setting ...[OK].
