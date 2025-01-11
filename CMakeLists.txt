@@ -21,7 +21,7 @@ qt_add_qml_module(appRedFormatter
     QML_FILES
         Main.qml
         SOURCES IssueList.h IssueList.cpp
-        QML_FILES IssueList.qml
+        QML_FILES
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

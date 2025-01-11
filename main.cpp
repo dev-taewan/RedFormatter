@@ -16,4 +16,3 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
-/Users/ioip/Desktop/study/project/qtproject/qmlcpplist/MyModel.h
