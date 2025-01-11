@@ -1,10 +1,15 @@
 import QtQuick
+<<<<<<< HEAD
 import RedFormatter
 import QtQuick.Controls
+=======
+
+>>>>>>> bc1a527 (qt set)
 Window {
     width: 640
     height: 480
     visible: true
+<<<<<<< HEAD
     title: qsTr("ListView with Custom Model")
 
     IssueList{
@@ -46,4 +51,7 @@ Window {
             }
         }
     }
+=======
+    title: qsTr("Hello World")
+>>>>>>> bc1a527 (qt set)
 }
