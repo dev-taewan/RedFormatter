@@ -1,15 +1,10 @@
 import QtQuick
-<<<<<<< HEAD
 import RedFormatter
 import QtQuick.Controls
-=======
-
->>>>>>> bc1a527 (qt set)
 Window {
     width: 640
     height: 480
     visible: true
-<<<<<<< HEAD
     title: qsTr("ListView with Custom Model")
 
     IssueList{
@@ -38,20 +33,18 @@ Window {
                 }
                 Text{
                     text:model.description
-                    color:"lightgrey"
+                    color:"Blue"
                 }
             }
         }
 
         Component.onCompleted:{
-            issueList.addItem("item1","This is the first item.")
+            //issueList.addItem("item1","This is the first item.")
             //javascript 문법 사용
-            for(var i=1;i<20;i++){
-                issueList.addItem("item"+i,"This is "+i+"Item.")
-            }
+            // for(var i=1;i<20;i++){
+            //     issueList.addItem("item"+i,"This is "+i+"Item.")
+            // }
+            issueList.fetch_issues()
         }
     }
-=======
-    title: qsTr("Hello World")
->>>>>>> bc1a527 (qt set)
 }

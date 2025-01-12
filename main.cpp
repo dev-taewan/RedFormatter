@@ -16,7 +16,3 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
-<<<<<<< HEAD
-=======
-/Users/ioip/Desktop/study/project/qtproject/qmlcpplist/MyModel.h
->>>>>>> bc1a527 (qt set)
