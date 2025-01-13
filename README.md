@@ -12,3 +12,5 @@ A tool for automating Redmine issue templates and ensuring consistent formatting
 2025.01.8
 - QT CREATOR + conan setting ...[OK].
  
+2025.01.13
+- study QT Design studio
