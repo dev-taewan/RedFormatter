@@ -14,3 +14,6 @@ A tool for automating Redmine issue templates and ensuring consistent formatting
  
 2025.01.13
 - study QT Design studio
+01.14
+- make logo
+- make card ui
