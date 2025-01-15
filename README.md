@@ -17,3 +17,5 @@ A tool for automating Redmine issue templates and ensuring consistent formatting
 01.14
 - make logo
 - make card ui
+01.15
+- make add button
