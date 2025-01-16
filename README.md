@@ -19,3 +19,6 @@ A tool for automating Redmine issue templates and ensuring consistent formatting
 - make card ui
 01.15
 - make add button
+
+01.16
+- make add issue event
