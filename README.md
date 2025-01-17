@@ -20,5 +20,5 @@ A tool for automating Redmine issue templates and ensuring consistent formatting
 01.15
 - make add button
 
-01.16
+01.16-17
 - make add issue event
