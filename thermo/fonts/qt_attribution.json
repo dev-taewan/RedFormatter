@@ -1,0 +1,29 @@
+[
+    {
+        "Id": "Roboto Font",
+        "Name": "Roboto Fonts by Google, Inc.",
+        "QDocModule": "thermo-demo",
+        "Files": "Roboto-Black.ttf, Roboto-BlackItalic.ttf, Roboto-Bold.ttf, Roboto-BoldItalic.ttf,
+        Roboto-Italic.ttf, Roboto-Light.ttf, Roboto-LightItalic.ttf, Roboto-Medium.ttf,
+        Roboto-MediumItalic.ttf, Roboto-Regular.ttf, Roboto-Thin.ttf, Roboto-ThinItalic.ttf",
+        "QtUsage": "Used in the Qt Ultralite Thermostat Demo",
+        "Homepage": "treat as final",
+        "Homepage": "http://www.apache.org/licenses/",
+        "License": "Apache License 2.0",
+        "LicenseId": "Apache-2.0",
+        "LicenseFile": "LICENSE.txt",
+        "Copyright": "Copyright (c) 2004 Google, Inc."
+    },
+    {
+        "Id": "Noto Sans JP",
+        "Name": "Noto Sans Japanese Family Font",
+        "QDocModule": "thermo-demo",
+        "Files": "NotoSansJP-Regular.otf",
+        "QtUsage": "Used in the Qt Ultralite Thermostat Demo",
+        "Homepage": "https://fonts.google.com/specimen/Noto+Sans+JP",
+        "License": "SIL Open Font License 1.1",
+        "LicenseId": "OFL-1.1",
+        "LicenseFile": "OFL.txt",
+        "Copyright": "Copyright (c) Google, Inc."
+    }
+]
