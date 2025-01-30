@@ -1,50 +1,29 @@
 import QtQuick
-import RedFormatter
-import QtQuick.Controls
+import Thermo 1.0
+import ThermoConfiguration 1.0
+import RedmineTest
+// Window {
+//     width: 640
+//     height: 480
+//     visible: true
+//     title: qsTr("Hello World")
+// }
+
+// Item {
+//     id: appWindow
+//     width: Theme.screenWidth
+//     height: Theme.screenHeight
+
+
+// }
 Window {
-    width: 640
-    height: 480
     visible: true
-    title: qsTr("ListView with Custom Model")
+    width: 720
+    height: 480
 
-    IssueList{
-        id:issueList
-
-    }
-    ListView{
-        id:listView
+    Loader {
+        id: blackBoxLoader
+        source: "contents/MainView.ui.qml"
         anchors.fill: parent
-        model:issueList
-        ScrollBar.vertical: ScrollBar{
-                               id:verticalScrollBar
-                               width:14
-                               policy:ScrollBar.AlwaysOn
-                           }
-
-        delegate:Item{
-            height: column.height+10
-            Row{
-                id:column
-                spacing:10
-                Text{
-                    text:model.name
-                    font.bold:true
-
-                }
-                Text{
-                    text:model.description
-                    color:"Blue"
-                }
-            }
-        }
-
-        Component.onCompleted:{
-            //issueList.addItem("item1","This is the first item.")
-            //javascript 문법 사용
-            // for(var i=1;i<20;i++){
-            //     issueList.addItem("item"+i,"This is "+i+"Item.")
-            // }
-            issueList.fetch_issues()
-        }
     }
 }

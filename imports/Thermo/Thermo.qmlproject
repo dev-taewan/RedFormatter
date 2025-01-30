@@ -1,0 +1,16 @@
+import QmlProject 1.3
+
+Project {
+    platforms: [ "desktop" ] // PC 플랫폼 지정
+    uri: "Thermo" // QML 모듈 네임스페이스
+
+    QmlFiles {
+        files: [
+            "ColorStyle.qml",
+            "Room.qml",
+            "Rooms.qml",
+            "Theme.qml",
+            "Units.qml"
+        ]
+    }
+}

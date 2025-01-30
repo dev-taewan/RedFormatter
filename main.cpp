@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.loadFromModule("RedFormatter", "Main");
+    engine.loadFromModule("RedmineTest", "Main");
 
     return app.exec();
 }
