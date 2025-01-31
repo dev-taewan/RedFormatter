@@ -1,7 +1,7 @@
 import QtQuick
 import Thermo 1.0
 import ThermoConfiguration 1.0
-import RedmineTest
+import Redformatter
 // Window {
 //     width: 640
 //     height: 480

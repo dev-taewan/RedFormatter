@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import Thermo 1.0
-import RedmineTest
+import Redformatter
 Rectangle {
     id: root
     color: "blue"

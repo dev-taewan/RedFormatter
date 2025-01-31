@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(RedmineTest VERSION 0.1 LANGUAGES CXX)
+project(Redformatter VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -13,10 +13,10 @@ set(MODULE_QML_FILES
 qt_standard_project_setup(REQUIRES 6.5)
 qt_policy(SET QTP0004 NEW)
 
-qt_add_executable(appRedmineTest
+qt_add_executable(appRedformatter
     main.cpp
 )
-qt_add_resources(appRedmineTest "assets"
+qt_add_resources(appRedformatter "assets"
     PREFIX "/"
     FILES
                 assets/qt-logo.png
@@ -87,7 +87,7 @@ qt_add_resources(appRedmineTest "assets"
                 assets/fan-4-on.png
                 assets/fan-4-on-small.png
 )
-qt_add_resources(appRedmineTest "images"
+qt_add_resources(appRedformatter "images"
     PREFIX "/"
     FILES
                images/inner-circle.png
@@ -96,7 +96,7 @@ qt_add_resources(appRedmineTest "images"
                images/card-back-topright.png
                images/card-back-bottomright.png
 )
-qt_add_resources(appRedmineTest "fonts"
+qt_add_resources(appRedformatter "fonts"
     PREFIX "/"
     FILES
                 fonts/NotoSansArabic-Regular.ttf
@@ -104,8 +104,8 @@ qt_add_resources(appRedmineTest "fonts"
                 fonts/NotoSansThai-Regular.ttf
                 fonts/Roboto-Regular.ttf
 )
-qt_add_qml_module(appRedmineTest
-    URI RedmineTest
+qt_add_qml_module(appRedformatter
+    URI Redformatter
     VERSION 1.0
     QML_FILES
         Main.qml
@@ -133,15 +133,15 @@ qt_add_qml_module(ThermoConfiguration_module
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
-set_target_properties(appRedmineTest PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appRedmineTest
+set_target_properties(appRedformatter PROPERTIES
+#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appRedformatter
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appRedmineTest
+target_link_libraries(appRedformatter
     PRIVATE Qt6::Quick
     PRIVATE Thermo_module
     ThermoConfiguration_module
@@ -149,7 +149,7 @@ target_link_libraries(appRedmineTest
 
 include(GNUInstallDirs)
 #add_subdirectory(imports)
-install(TARGETS appRedmineTest
+install(TARGETS appRedformatter
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

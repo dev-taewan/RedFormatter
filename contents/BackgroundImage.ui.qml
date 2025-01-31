@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import RedmineTest
+import Redformatter
 
 Image {
     source: "qrc:/assets/main-bg.png"
