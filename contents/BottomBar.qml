@@ -3,7 +3,7 @@ import Thermo 1.0
 import Redformatter
 Rectangle {
     id: root
-    color: "blue"
+    color: "white"
 
     property int selected
 
@@ -16,10 +16,12 @@ Rectangle {
         NumberAnimation {}
     }
 
-    // Connections {
-    //     target: root
-    //     onSelectedChanged: viewSwitched(selected)
-    // }
+    Connections {
+        target: root
+        function onSelectedChanged() {
+                viewSwitched(selected)
+            }
+    }
 
     Row {
         id: row
@@ -31,12 +33,15 @@ Rectangle {
             height: root.height
 
             isSelected: root.selected === 0
-            title: qsTr("Places")
+            title: qsTr("Issues")
 
-            // Connections {
-            //     target: placesButton
-            //     onClicked: root.selected = 0
-            // }
+            Connections {
+                target: placesButton
+                function onClicked()
+                {
+                    root.selected = 0
+                }
+            }
         }
 
         BottomBarButton {
@@ -45,12 +50,19 @@ Rectangle {
             height: root.height
 
             isSelected: root.selected === 1
-            title: qsTr("Schedule")
+            title: qsTr("New")
 
             // Connections {
             //     target: scheduleButton
             //     onClicked: root.selected = 1
-            // }
+            //}
+            Connections {
+                target: scheduleButton
+                function onClicked()
+                {
+                    root.selected = 1
+                }
+            }
         }
 
         BottomBarButton {
@@ -65,6 +77,13 @@ Rectangle {
             //     target: statsButton
             //     onClicked: root.selected = 2
             // }
+            Connections {
+                target: statsButton
+                function onClicked()
+                {
+                    root.selected = 2
+                }
+            }
         }
     }
 }

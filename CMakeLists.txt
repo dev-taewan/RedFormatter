@@ -4,11 +4,13 @@ project(Redformatter VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Qml)
+set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}/imports" CACHE STRING "Qt QML import path")
 set(MODULE_QML_FILES
     imports/Thermo/ColorStyle.qml
     imports/Thermo/Rooms.qml
-    imports/Thermo/Room.qml)
+    imports/Thermo/Room.qml
+    imports/Thermo/Theme.qml)
 
 qt_standard_project_setup(REQUIRES 6.5)
 qt_policy(SET QTP0004 NEW)
@@ -104,24 +106,46 @@ qt_add_resources(appRedformatter "fonts"
                 fonts/NotoSansThai-Regular.ttf
                 fonts/Roboto-Regular.ttf
 )
+
 qt_add_qml_module(appRedformatter
     URI Redformatter
     VERSION 1.0
+    RESOURCES resource.qrc
     QML_FILES
         Main.qml
-        QML_FILES contents/MainView.ui.qml
-        QML_FILES contents/BottomBar.qml
-        QML_FILES contents/BottomBarButton.ui.qml
-        RESOURCES resource.qrc
-        QML_FILES contents/BackgroundImage.ui.qml
+         contents/MainView.ui.qml
+         contents/BottomBar.qml
+         contents/BottomBarButton.ui.qml
+         contents/BackgroundImage.ui.qml
+         contents/Issue.ui.qml
+         contents/IssueRow.ui.qml
+         contents/PlacesView.ui.qml
+         contents/ThermoView.qml
+         contents/PlacesDotIndicator.ui.qml
+        contents/ColorizedImage.qml
+
 )
+
+set_source_files_properties(imports/Thermo/Rooms.qml
+    PROPERTIES
+        QT_QML_SINGLETON_TYPE true
+)
+
+set_source_files_properties(imports/Thermo/Theme.qml
+    PROPERTIES
+        QT_QML_SINGLETON_TYPE true
+)
+set_source_files_properties(imports/Thermo/ColorStyle.qml
+    PROPERTIES
+        QT_QML_SINGLETON_TYPE true
+)
+
 qt_add_qml_module(Thermo_module
     URI Thermo
     VERSION 1.0
     QML_FILES
-        imports/Thermo/Theme.qml
         ${MODULE_QML_FILES}
-    OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/imports/Thermo
+    # OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/imports/Thermo
 )
 qt_add_qml_module(ThermoConfiguration_module
     URI ThermoConfiguration
@@ -144,7 +168,7 @@ set_target_properties(appRedformatter PROPERTIES
 target_link_libraries(appRedformatter
     PRIVATE Qt6::Quick
     PRIVATE Thermo_module
-    ThermoConfiguration_module
+    PRIVATE ThermoConfiguration_module
 )
 
 include(GNUInstallDirs)

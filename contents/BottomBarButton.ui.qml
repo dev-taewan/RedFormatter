@@ -14,18 +14,24 @@ Item {
         anchors.fill: parent
         anchors.topMargin: -15
 
-        // Connections {
-        //     target: delegateMA
-        //     onClicked: buttonRoot.clicked()
-        // }
+        Connections {
+            target: delegateMA
+            function onClicked() {
+                buttonRoot.clicked()
+            }
+        }
+    }
+    FontLoader {
+        id: button_text_fam
+        source: "qrc:/fonts/Roboto-Regular.ttf"
     }
 
     Text {
         anchors.centerIn: parent
         text: parent.title
-        font.pixelSize: 24
-        // font.family: "qrc:/fonts/Roboto-Regular.ttf"
-        color: buttonRoot.isSelected ? "blue" : "greyDark4"
+        font.pixelSize: Theme.bottomBarFontSize
+        font.family: button_text_fam.name
+        color: buttonRoot.isSelected ? ColorStyle.blue : ColorStyle.greyDark4
     }
     Image {
         anchors.bottom: parent.bottom

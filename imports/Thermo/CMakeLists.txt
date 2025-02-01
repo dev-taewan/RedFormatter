@@ -22,6 +22,7 @@ qt_add_qml_module(Theme
     QML_FILES
         Theme.qml
         Rooms.qml
+	Room.qml
         ColorStyle.qml
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/imports/Theme
 )
