@@ -49,10 +49,14 @@ ThermoView {
 
             Connections {
                 target: cardRow
-                onSelected: {
+                function onSelected() {
                     root.currentRoom = cardRow.selectedRoom
                     root.showMain = false
                 }
+                // onSelected: {
+                //     root.currentRoom = cardRow.selectedRoom
+                //     root.showMain = false
+                // }
             }
         }
     }

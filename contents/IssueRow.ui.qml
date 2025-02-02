@@ -38,13 +38,13 @@ Row {
 
         room: Rooms.livingRoom
 
-        Connections {
-            target: livingCard
-            onSelected: {
-                root.selectedRoom = livingCard.room
-                root.selected()
-            }
-        }
+        // Connections {
+        //     target: livingCard
+        //     onSelected: {
+        //         root.selectedRoom = livingCard.room
+        //         root.selected()
+        //     }
+        // }
     }
 
     // Card {

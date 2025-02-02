@@ -17,7 +17,25 @@ Item {
     BackgroundImage {
         anchors.fill: parent
     }
+    TopBar {
+        id: topBar
+        width: parent.width
+        height: Theme.topBarHeight
 
+        showBackButton: !places.showMain
+        title: places.currentRoom.name
+
+        Connections {
+            target: topBar
+
+            function onBackClicked() {
+                places.showMain = true
+            }
+            function onSettingsClicked() {
+                languageDialog.triggerAnimation()
+            }
+        }
+    }
     Item {
         id: mainItem
         anchors.left: parent.left
@@ -35,7 +53,7 @@ Item {
             showMain: true
             Connections {
                 target: places
-                onShowMainChanged: {
+                function onShowMainChanged() {
                     appWindow.selectedView = !places.showMain ? 5 : 0
                 }
             }

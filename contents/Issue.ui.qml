@@ -2,23 +2,28 @@ import QtQuick 2.15
 import Thermo 1.0
 import ThermoConfiguration 1.0
 import Redformatter
+import QtQuick.Controls
+import QtQuick.Layouts
 
 Item {
     id: root
 
     property Room room
 
-    width: 324
-    height: 132
+    width: Theme.cardWidth
+    height: Theme.cardHeight
 
     signal selected
-
+    FontLoader {
+        id: button_text_fam
+        source: "qrc:/fonts/Roboto-Regular.ttf"
+    }
     Item {
         width: Theme.cardWidth
         height: Theme.cardHeight
 
         Image {
-            source: "images/card-back-topleft.png"
+            source: "qrc:/images/card-back-topleft.png"
         }
 
         Rectangle {
@@ -30,7 +35,7 @@ Item {
 
         Image {
             x: Theme.cardWidth - Theme.cardCornerRadius
-            source: "images/card-back-topright.png"
+            source: "qrc:/images/card-back-topright.png"
         }
 
         Rectangle {
@@ -42,7 +47,7 @@ Item {
 
         Image {
             y: Theme.cardHeight - Theme.cardCornerRadius
-            source: "images/card-back-bottomleft.png"
+            source: "qrc:/images/card-back-bottomleft.png"
         }
 
         Rectangle {
@@ -56,137 +61,134 @@ Item {
         Image {
             x: Theme.cardWidth - Theme.cardCornerRadius
             y: Theme.cardHeight - Theme.cardCornerRadius
-            source: "images/card-back-bottomright.png"
+            source: "qrc:/images/card-back-bottomright.png"
         }
 
-        Row {
-            id: temperatureText
-            anchors.top: parent.top
-            anchors.topMargin: Theme.cardTemperatureTopMargin
-            anchors.left: parent.left
-            anchors.leftMargin: Theme.cardTemperatureLeftMargin
-            anchors.right: parent.right
+        // Row {
+        //     id: issue_head_info
+        //     anchors.top: parent.top
+        //     anchors.leftMargin: Theme.cardRoomColumnLeftMargin
+        //     anchors.rightMargin: Theme.cardRoomColumnLeftMargin
+        //     anchors.left: parent.left
+        //     anchors.right: parent.right
+        //     anchors.topMargin: Theme.cardTemperatureTopMargin
+        //     Text {
+        //         id: temp
+        //         text: "AIEngine"
+        //         font.pixelSize: 20
+        //         font.family: button_text_fam.name
+        //         font.weight: Font.Medium
+        //         color: ColorStyle.greyDark4
+        //     }
+        //     Text {
+        //         anchors.right: parent.right
+        //         font.pixelSize: Theme.cardFloorFontSize
+        //         font.family: button_text_fam.name
+        //         text: "일감번호"
+        //         color: ColorStyle.greyDark1
+        //     }
+        // }
+        Item {
+            id: issue_head_info
 
-            height: 48
-            width: temp.text.length != 0 ? 92 : 0
-            visible: temp.text.length !== 0
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.topMargin: Theme.cardTemperatureTopMargin
+            anchors.leftMargin: Theme.cardRoomColumnLeftMargin
+            anchors.rightMargin: Theme.cardRoomColumnLeftMargin
 
             Text {
                 id: temp
-                text: "Type"
-                font.pixelSize: 60
-                font.family: "Roboto"
+                text: "AIEngine"
+                font.pixelSize: 20
+                font.family: button_text_fam.name
                 font.weight: Font.Medium
                 color: ColorStyle.greyDark4
-                visible: text.length !== 0
-                height: parent.height
-                anchors.topMargin: -8
-                anchors.top: parent.top
             }
 
-            // Text {
-            //     anchors.top: parent.top
-            //     font.family: "Roboto"
-            //     font.pixelSize: 20
-            //     color: ColorStyle.greyDark4
-            //     text: Units.temperatureSymbol
-            // }
-        }
-
-        Column {
-            id: roomColumn
-            anchors.top: parent.top
-            anchors.topMargin: Theme.cardRoomColumnTopMargin
-            anchors.left: parent.left
-            anchors.leftMargin: Theme.cardRoomColumnLeftMargin
-
-            spacing: Theme.cardRoomColumnSpacing
-
             Text {
-                font.pixelSize: Theme.cardRoomFontSize
-                font.weight: Font.Light
-                text: "issue title"
-                font.family: "Roboto"
-                color: ColorStyle.greyDark4
-            }
-            Text {
+                anchors.right: parent.right
                 font.pixelSize: Theme.cardFloorFontSize
-                font.family: "Roboto"
+                font.family: button_text_fam.name
                 text: "일감번호"
                 color: ColorStyle.greyDark1
             }
         }
-
-        Image {
-            x: Theme.cardSeparatorLeftMargin
-            y: Theme.cardSeparatorTopMargin
-            source: "assets/separator-line.png"
-        }
-
-        Row {
-            //진행률 표시
-            visible: root.room.status !== Room.Off && !root.room.auto_
-            spacing: Theme.cardIndicatorSpacing
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 25
+        Column {
+            id: roomColumn
+            anchors.top: parent.top
+            anchors.topMargin: 50 + Theme.cardRoomColumnSpacing + 5
             anchors.left: parent.left
-            anchors.leftMargin: 22
-
-            ColorizedImage {
-                source: "assets/dryer-on-small.png"
-                color: root.room.dryer ? ColorStyle.blue : ColorStyle.greyMedium3
-            }
+            anchors.right: parent.right
+            anchors.leftMargin: Theme.cardRoomColumnLeftMargin
+            anchors.rightMargin: Theme.cardRoomColumnLeftMargin
+            spacing: Theme.cardRoomColumnSpacing + 5
 
             Image {
-                source: root.room.smallFanImage
+                anchors.right: parent.right
+                anchors.left: parent.left
+                source: "qrc:/assets/separator-line.png"
             }
-
-            ColorizedImage {
-                source: "assets/eco-on-small.png"
-                color: root.room.eco ? ColorStyle.blue : ColorStyle.greyMedium3
-            }
-
-            ColorizedImage {
-                source: "assets/streamer-on-small.png"
-                color: root.room.streamer ? ColorStyle.blue : ColorStyle.greyMedium3
+            Text {
+                anchors.right: parent.right
+                anchors.left: parent.left
+                width: root.width
+                wrapMode: Text.WrapAnywhere
+                font.pixelSize: Theme.cardRoomFontSize
+                font.weight: Font.Light
+                text: "가나다라마바사아자카타파하파하파하"
+                font.family: button_text_fam.name
+                color: ColorStyle.greyDark4
             }
         }
 
-        Image {
-            id: autoIndicator
-            visible: root.room.status !== Room.Off && root.room.auto_
+        ProgressBar {
+            //진행률 표시
+            id: progressbar
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 25
+            anchors.bottomMargin: progressbar.r
             anchors.left: parent.left
-            anchors.leftMargin: 22
-            source: "assets/auto-card.png"
+            anchors.leftMargin: progressbar.r
         }
+        Column {
 
-        Row {
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 23
-            anchors.left: parent.left
-            anchors.leftMargin: Theme.isBig ? 305 - width : (root.room.status
-                                                             === Room.Off ? 22 : 122)
+            anchors.bottomMargin: Theme.cardRoomColumnLeftMargin
+            anchors.right: parent.right
+            anchors.rightMargin: Theme.cardRoomColumnLeftMargin
 
             spacing: 3
+            Row {
+                spacing: 3
+                ColorizedImage {
+                    id: status_led
 
-            Text {
-                text: ((root.room.status === Room.Heating) ? qsTr("Overdue") : (root.room.status === Room.Cooling) ? qsTr("On Time") : qsTr("Off"))
-                color: ColorStyle.greyDark1
-                font.pixelSize: Theme.cardStateFontSize
-                font.family: "Roboto"
+                    property bool isCurrent
+
+                    source: "qrc:/assets/status-small.png"
+                    //status_led.sourceImage.source
+                    width: 30
+                    height: 30
+                    color: ColorStyle.greenLight
+                }
+                Text {
+                    id: status_msg
+                    text: "Overdue" // on time
+                    color: ColorStyle.greyDark1
+                    font.pixelSize: Theme.cardStateFontSize
+                    font.family: button_text_fam.name
+                }
             }
 
-            ColorizedImage {
-                y: Theme.isBig ? 3 : 2
-                source: "assets/status-small.png"
-                color: ((root.room.status === Room.Heating) ? ColorStyle.pinkyRed : (root.room.status === Room.Cooling) ? ColorStyle.blue : ColorStyle.greyMedium3)
-            }
+            property date currentDate: new Date()
             Text {
+                //anchors.bottom: parent.bottom
+                anchors.right: parent.right
                 font.pixelSize: Theme.cardFloorFontSize
-                font.family: "Roboto"
-                text: "기타등등"
+                font.family: button_text_fam.name
+                // "yyyy년 MM월 dd일" 포맷으로 표시
+                text: Qt.formatDate(parent.currentDate, "yy년 MM월 dd일")
                 color: ColorStyle.greyDark1
             }
         }
@@ -199,31 +201,28 @@ Item {
 
             Connections {
                 target: ta
-                onClicked: root.selected()
+                function onClicked() {
+                    root.selected()
+                }
             }
         }
     }
-
-    // PowerSwitch {
-    //     id: enabledSwitch
-    //     enabled: root.enabled
-
-    //     y: Theme.powerSwitchTopMargin
-
-    //     anchors.right: parent.right
-    //     anchors.rightMargin: Theme.powerSwitchRightMargin
-    //     checked: root.room.status !== Room.Off
-
-    //     Connections {
-    //         target: enabledSwitch
-
-    //         onEnabledChanged: {
-    //             enabledSwitch.checked = (root.room.status !== Room.Off)
+    // states: [
+    //     State {
+    //         name: "over"
+    //         when: isCurrent
+    //         PropertyChanges {
+    //             target: status_led
+    //             color: ColorStyle.blue
     //         }
-
-    //         onCheckedChanged: {
-    //             root.room.power = enabledSwitch.checked
+    //     },
+    //     State {
+    //         name: "running"
+    //         when: isCurrent
+    //         PropertyChanges {
+    //             target: status_led
+    //             color: ColorStyle.blue
     //         }
     //     }
-    // }
+    // ]
 }

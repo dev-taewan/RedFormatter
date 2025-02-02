@@ -7,7 +7,7 @@ ColorizedImage {
 
     property bool isCurrent
 
-    source: "assets/page-indicator.png"
+    source: "qrc:/assets/page-indicator.png"
     color: ColorStyle.greyDark1
 
     states: [

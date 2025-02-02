@@ -122,7 +122,9 @@ qt_add_qml_module(appRedformatter
          contents/PlacesView.ui.qml
          contents/ThermoView.qml
          contents/PlacesDotIndicator.ui.qml
-        contents/ColorizedImage.qml
+         contents/ColorizedImage.qml
+         contents/TopBar.qml
+         QML_FILES contents/ProgressBar.qml
 
 )
 
@@ -139,7 +141,10 @@ set_source_files_properties(imports/Thermo/ColorStyle.qml
     PROPERTIES
         QT_QML_SINGLETON_TYPE true
 )
-
+set_source_files_properties(imports/ThermoConfiguration/Configuration.qml
+    PROPERTIES
+        QT_QML_SINGLETON_TYPE true
+)
 qt_add_qml_module(Thermo_module
     URI Thermo
     VERSION 1.0

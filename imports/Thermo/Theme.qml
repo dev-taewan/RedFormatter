@@ -66,7 +66,7 @@ QtObject {
     readonly property int powerSwitchRightMargin: 11
     readonly property int powerSwitchTopMargin: 11
 
-    readonly property int cardWidth: 325
+    readonly property int cardWidth: 350
     readonly property int cardHeight: 250
     readonly property int cardCornerRadius: 12
     readonly property int cardRowSpacing: 20
