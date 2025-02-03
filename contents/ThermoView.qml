@@ -5,7 +5,11 @@ Item {
     id: root
     property int selectedView: -1
     property int index: -1
-
+    Rectangle {
+            anchors.fill: parent
+            color: "#5ae0aa"
+            z: -1 // 다른 컴포넌트들보다 뒤에 오도록
+        }
     Behavior on opacity {
         enabled: Configuration.enableFadingAnimations
         NumberAnimation {}

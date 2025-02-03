@@ -9,14 +9,10 @@ Item {
     height: Theme.screenHeight
 
     property int selectedView: 0
-    // Rectangle {
-    //     width: 100
-    //     height: 100
-    //     color: "blue"
+
+    // BackgroundImage {
+    //     anchors.fill: parent
     // }
-    BackgroundImage {
-        anchors.fill: parent
-    }
     TopBar {
         id: topBar
         width: parent.width
