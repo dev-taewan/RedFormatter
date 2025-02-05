@@ -7,9 +7,13 @@ import QtQuick.Layouts
 
 Item {
     id: root
-
-    property Room room
-
+    property string issue_type
+    property int issue_id
+    property string issue_title
+    property int achievment_rate
+    property bool is_overdue: false
+    property date deadline
+    //property Room room
     width: Theme.cardWidth
     height: Theme.cardHeight
 
@@ -99,8 +103,7 @@ Item {
             anchors.rightMargin: Theme.cardRoomColumnLeftMargin
 
             Text {
-                id: temp
-                text: "AIEngine"
+                text: issue_type
                 font.pixelSize: 20
                 font.family: button_text_fam.name
                 font.weight: Font.Medium
@@ -111,7 +114,7 @@ Item {
                 anchors.right: parent.right
                 font.pixelSize: Theme.cardFloorFontSize
                 font.family: button_text_fam.name
-                text: "일감번호"
+                text: issue_id //"일감번호"
                 color: ColorStyle.greyDark1
             }
         }
@@ -137,7 +140,7 @@ Item {
                 wrapMode: Text.WrapAnywhere
                 font.pixelSize: Theme.cardRoomFontSize
                 font.weight: Font.Light
-                text: "가나다라마바사아자카타파하파하파하"
+                text: issue_title
                 font.family: button_text_fam.name
                 color: ColorStyle.greyDark4
             }
@@ -146,6 +149,7 @@ Item {
         ProgressBar {
             //진행률 표시
             id: progressbar
+            rangeValue: achievment_rate
             anchors.bottom: parent.bottom
             anchors.bottomMargin: progressbar.r
             anchors.left: parent.left
@@ -174,21 +178,22 @@ Item {
                 }
                 Text {
                     id: status_msg
-                    text: "Overdue" // on time
+
+                    text: is_overdue ? "Overdue" : "On Time" // on time
                     color: ColorStyle.greyDark1
                     font.pixelSize: Theme.cardStateFontSize
                     font.family: button_text_fam.name
                 }
             }
 
-            property date currentDate: new Date()
+            //property date currentDate: new Date()
             Text {
                 //anchors.bottom: parent.bottom
                 anchors.right: parent.right
                 font.pixelSize: Theme.cardFloorFontSize
                 font.family: button_text_fam.name
                 // "yyyy년 MM월 dd일" 포맷으로 표시
-                text: Qt.formatDate(parent.currentDate, "yy년 MM월 dd일")
+                text: Qt.formatDate(parent.deadline, "yy년 MM월 dd일")
                 color: ColorStyle.greyDark1
             }
         }

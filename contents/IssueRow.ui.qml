@@ -36,7 +36,7 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
         enabled: root.enabled
 
-        room: Rooms.livingRoom
+        //room: Rooms.livingRoom
 
         // Connections {
         //     target: livingCard

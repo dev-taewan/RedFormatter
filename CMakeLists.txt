@@ -152,12 +152,20 @@ qt_add_qml_module(Thermo_module
         ${MODULE_QML_FILES}
     # OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/imports/Thermo
 )
+
 qt_add_qml_module(ThermoConfiguration_module
     URI ThermoConfiguration
     VERSION 1.0
     QML_FILES
         imports/ThermoConfiguration/Configuration.qml
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/imports/ThermoConfiguration
+)
+qt_add_qml_module(RedmineAPI
+    URI Redmine
+    VERSION 1.0
+    SOURCES IssueList.cpp IssueList.h
+    QML_FILES IssueList.qml
+    OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Redmine
 )
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
