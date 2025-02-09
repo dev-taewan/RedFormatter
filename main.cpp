@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <cpprest/http_client.h>
+#include <cpprest/filestream.h>
 
 int main(int argc, char *argv[])
 {

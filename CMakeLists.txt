@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(Redformatter VERSION 0.1 LANGUAGES CXX)
-
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
+include(FetchContent)
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Qml)
 set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}/imports" CACHE STRING "Qt QML import path")
 set(MODULE_QML_FILES
@@ -150,7 +150,7 @@ qt_add_qml_module(Thermo_module
     VERSION 1.0
     QML_FILES
         ${MODULE_QML_FILES}
-    # OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/imports/Thermo
+    OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/imports/Thermo
 )
 
 qt_add_qml_module(ThermoConfiguration_module
@@ -160,6 +160,7 @@ qt_add_qml_module(ThermoConfiguration_module
         imports/ThermoConfiguration/Configuration.qml
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/imports/ThermoConfiguration
 )
+
 qt_add_qml_module(RedmineAPI
     URI Redmine
     VERSION 1.0
@@ -177,17 +178,42 @@ set_target_properties(appRedformatter PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
-
+find_package(cpprestsdk REQUIRED)
+find_package(Boost REQUIRED )
+find_package(OpenSSL REQUIRED)
 target_link_libraries(appRedformatter
     PRIVATE Qt6::Quick
     PRIVATE Thermo_module
     PRIVATE ThermoConfiguration_module
+    PRIVATE cpprestsdk::cpprestsdk
+    PRIVATE Boost::system
+    PRIVATE Boost::filesystem
+    PRIVATE Boost::thread
+    PRIVATE Boost::regex
+    PRIVATE OpenSSL::SSL
+    PRIVATE OpenSSL::Crypto
 )
-
-include(GNUInstallDirs)
+target_link_libraries(RedmineAPI
+    PRIVATE Qt6::Quick
+    PRIVATE Thermo_module
+    PRIVATE ThermoConfiguration_module
+    PRIVATE cpprestsdk::cpprestsdk
+    PRIVATE Boost::system
+    PRIVATE Boost::filesystem
+    PRIVATE Boost::thread
+    PRIVATE Boost::regex
+    PRIVATE OpenSSL::SSL
+    PRIVATE OpenSSL::Crypto
+)
+#include(GNUInstallDirs)
 #add_subdirectory(imports)
-install(TARGETS appRedformatter
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+# install(TARGETS appRedformatter
+#     BUNDLE DESTINATION .
+#     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+# )
+# install(TARGETS appRedformatter
+#     RUNTIME DESTINATION bin
+#     LIBRARY DESTINATION lib
+#     ARCHIVE DESTINATION lib
+# )
