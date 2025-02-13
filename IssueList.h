@@ -1,11 +1,14 @@
 #pragma once
 #include <QAbstractlistModel>
 #include <QQmlEngine>
-
+#include <QtQuick>
 class IssueItem{
 public:
-    QString name;
-    QString description;
+    QString issue_id;
+    QString issue_title;
+    int achievment_rate;
+    bool is_overdue=false;
+    QString deadline;
 };
 
 class IssueList : public QAbstractListModel
@@ -14,9 +17,11 @@ class IssueList : public QAbstractListModel
     QML_ELEMENT
 public:
     enum ItemRoles{
-        NameRole=Qt::UserRole+1,
-        DescriptionRole,
-
+        IdRole=Qt::UserRole+1,
+        IssueTitleRole,
+        AchievmentRateRole,
+        IsOverdueRole,
+        DeadLineRole,
     };
     explicit IssueList(QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent=QModelIndex())const override;
