@@ -27,12 +27,19 @@ QVariant IssueList::data(const QModelIndex &index, int role) const
     if(!index.isValid() || index.row() <0 || index.row()>=m_items.count()){
         return QVariant();
     }
+
     const IssueItem &item=m_items[index.row()];
     switch(role){
-    case NameRole:
-        return item.name;
-    case DescriptionRole:
-        return item.description;
+    case IdRole:
+        return item.issue_id;
+    case IssueTitleRole:
+        return item.issue_title;
+    case AchievmentRateRole:
+        return item.achievment_rate;
+    case IsOverdueRole:
+        return item.is_overdue;
+    case DeadLineRole:
+        return item.deadline;
     default:
         return QVariant();
     }
@@ -58,19 +65,43 @@ void IssueList::fetch_issues()
                       std::cout<<"Redmine Issues: "<<std::endl;
                       auto issues=jsonResponse[U("issues")];
                       QList<IssueItem> newItems;
-                      for (const auto& issue: issues.as_array()){
-                          auto id=issue.at(U("id")).as_integer();
-                          auto subject=issue.at(U("subject")).as_string();
-                          auto author=issue.at(U("assigned_to"));
-                          auto name=author.at(U("name")).as_string();
-                          std::cout<<"ID "<<id<<" name:"<<name<<" Subject: "<<subject <<std::endl;
-                          //result.push_back({std::to_string(id),subject});
+                      for (const auto &issue : issues.as_array()) {
+                          QString id;
+                          if (issue.has_field(U("id"))) {
+                              id = QString::number(issue.at(U("id")).as_integer());
+                          } else {
+                              continue;  // ID 없는 이슈는 무시
+                          }
+                          QString name;
+                          if (issue.has_field(U("assigned_to"))) {
+                              auto author = issue.at(U("assigned_to"));
+                              name = QString::fromStdString(author.at(U("name")).as_string());
+                          } else {
+                              continue;  // ID 없는 이슈는 무시
+                          }
+
+
+                          QString subject = issue.has_field(U("subject"))
+                                                ? QString::fromStdString(issue.at(U("subject")).as_string())
+                                                : "No Title";
+
+                          QString deadline = issue.has_field(U("due_date"))
+                                                 ? QString::fromStdString(issue.at(U("due_date")).as_string())
+                                                 : "No Deadline";
 
                           IssueItem item;
-                          item.name = QString::fromStdString(name);
-                          item.description = QString::fromStdString(subject);
-                          newItems.append(item);
+                          item.issue_id = id;
+                          item.author=name;
+                          item.issue_title = subject;
+                          item.deadline = deadline;
 
+                          std::cout << "ID: " << item.issue_id.toStdString()
+                                    << "name: " << item.author.toStdString()
+                                    << " Deadline: " << item.deadline.toStdString()
+                                    << " Subject: " << item.issue_title.toStdString()
+                                    << std::endl;
+
+                          newItems.append(item);
                       }
                       QMetaObject::invokeMethod(QCoreApplication::instance(), [this, newItems]()
                                                 {
@@ -85,15 +116,18 @@ void IssueList::fetch_issues()
     }
     catch (const std::exception &e)
     {
-        std::cerr << "Error: " << e.what() << '\n';
+        std::cerr <<" Issue List Error: " << e.what() << '\n';
     }
 }
-void IssueList::addItem(const QString &name, const QString &description)
+void IssueList::addItem(const QString issue_id, const QString issue_title,int achievment_rate,bool is_overdue,QString deadline)
 {
     beginInsertRows(QModelIndex(),rowCount(),rowCount());
     IssueItem item;
-    item.name=name;
-    item.description=description;
+    item.issue_id=issue_id;
+    item.issue_title=issue_title;
+    item.achievment_rate=achievment_rate;
+    item.deadline=deadline;
+    item.is_overdue=is_overdue;
     m_items<<item;
     endInsertRows();
 }
@@ -101,7 +135,11 @@ void IssueList::addItem(const QString &name, const QString &description)
 QHash<int, QByteArray> IssueList::roleNames() const
 {
     QHash<int,QByteArray> roles;
-    roles[NameRole]="name";
-    roles[DescriptionRole]="description";
+    roles[IdRole]="id";
+    roles[Author]="author";
+    roles[IssueTitleRole]="title";
+    roles[AchievmentRateRole]="achievement";
+    roles[IsOverdueRole]="isoverdue";
+    roles[DeadLineRole]="deadline";
     return roles;
 }

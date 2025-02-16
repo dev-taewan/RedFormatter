@@ -49,7 +49,7 @@ QtObject {
     readonly property real roomButtonSpacing: 30
     readonly property real roomButtonMargin: 81
 
-    readonly property int cardRoomFontSize: 30
+    readonly property int cardRoomFontSize: 25
     readonly property int cardFloorFontSize: 16
     readonly property int cardTemperatureTopMargin: 22
     readonly property int cardTemperatureLeftMargin: 23
@@ -66,7 +66,7 @@ QtObject {
     readonly property int powerSwitchRightMargin: 11
     readonly property int powerSwitchTopMargin: 11
 
-    readonly property int cardWidth: 350
+    readonly property int cardWidth: 450
     readonly property int cardHeight: 250
     readonly property int cardCornerRadius: 12
     readonly property int cardRowSpacing: 20

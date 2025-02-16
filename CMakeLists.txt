@@ -167,6 +167,7 @@ qt_add_qml_module(RedmineAPI
     SOURCES IssueList.cpp IssueList.h
     QML_FILES IssueList.qml
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Redmine
+    QML_FILES NewIssue.ui.qml
 )
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -192,6 +193,7 @@ target_link_libraries(appRedformatter
     PRIVATE Boost::regex
     PRIVATE OpenSSL::SSL
     PRIVATE OpenSSL::Crypto
+    PRIVATE RedmineAPI
 )
 target_link_libraries(RedmineAPI
     PRIVATE Qt6::Quick

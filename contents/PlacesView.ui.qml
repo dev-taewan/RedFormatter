@@ -36,7 +36,6 @@ ThermoView {
         id: swipeView
         interactive: root.showMain
         anchors.fill: parent
-
         contentWidth: root.pageCount * root.cardSizeWithSpacing + 2 * Theme.cardRowOffset
         contentHeight: swipeView.height
 

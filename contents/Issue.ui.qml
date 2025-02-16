@@ -12,8 +12,8 @@ Item {
     property string issue_title
     property int achievment_rate
     property bool is_overdue: false
-    property date deadline
-    //property Room room
+    property string deadline
+    property Room room
     width: Theme.cardWidth
     height: Theme.cardHeight
 
@@ -67,31 +67,6 @@ Item {
             y: Theme.cardHeight - Theme.cardCornerRadius
             source: "qrc:/images/card-back-bottomright.png"
         }
-
-        // Row {
-        //     id: issue_head_info
-        //     anchors.top: parent.top
-        //     anchors.leftMargin: Theme.cardRoomColumnLeftMargin
-        //     anchors.rightMargin: Theme.cardRoomColumnLeftMargin
-        //     anchors.left: parent.left
-        //     anchors.right: parent.right
-        //     anchors.topMargin: Theme.cardTemperatureTopMargin
-        //     Text {
-        //         id: temp
-        //         text: "AIEngine"
-        //         font.pixelSize: 20
-        //         font.family: button_text_fam.name
-        //         font.weight: Font.Medium
-        //         color: ColorStyle.greyDark4
-        //     }
-        //     Text {
-        //         anchors.right: parent.right
-        //         font.pixelSize: Theme.cardFloorFontSize
-        //         font.family: button_text_fam.name
-        //         text: "일감번호"
-        //         color: ColorStyle.greyDark1
-        //     }
-        // }
         Item {
             id: issue_head_info
 
@@ -139,7 +114,7 @@ Item {
                 width: root.width
                 wrapMode: Text.WrapAnywhere
                 font.pixelSize: Theme.cardRoomFontSize
-                font.weight: Font.Light
+                font.weight: Font.Black
                 text: issue_title
                 font.family: button_text_fam.name
                 color: ColorStyle.greyDark4
@@ -193,7 +168,7 @@ Item {
                 font.pixelSize: Theme.cardFloorFontSize
                 font.family: button_text_fam.name
                 // "yyyy년 MM월 dd일" 포맷으로 표시
-                text: Qt.formatDate(parent.deadline, "yy년 MM월 dd일")
+                text: deadline
                 color: ColorStyle.greyDark1
             }
         }
@@ -211,7 +186,18 @@ Item {
                 }
             }
         }
+        Connections {
+            target: root // Connections target을 root로 설정
+            function onSelected() {
+                //root.selectedRoom = issueItem.room // room 값을 전달
+                //root.selected() // 부모의 selected 신호 발생
+                console.log("Issue ID: " + issue_id)
+                console.log("Issue Title: " + issue_title)
+                console.log("Deadline: " + deadline)
+            }
+        }
     }
+
     // states: [
     //     State {
     //         name: "over"

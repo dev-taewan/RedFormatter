@@ -3,6 +3,7 @@ import ThermoConfiguration 1.0
 
 Item {
     id: root
+
     property int selectedView: -1
     property int index: -1
     Rectangle {

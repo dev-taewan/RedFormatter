@@ -21,8 +21,10 @@
 **
 ******************************************************************************/
 import QtQuick 2.15
+import QtQuick.Controls 2.15
 import Thermo 1.0
 import Redformatter
+import Redmine
 
 Row {
     id: root
@@ -30,100 +32,42 @@ Row {
     spacing: 10
     property Room selectedRoom
     property int pageCount: 6
+    IssueList {
+        id: issue_list
 
-    Issue {
-        id: livingCard
-        anchors.verticalCenter: parent.verticalCenter
-        enabled: root.enabled
-
-        //room: Rooms.livingRoom
-
-        // Connections {
-        //     target: livingCard
-        //     onSelected: {
-        //         root.selectedRoom = livingCard.room
-        //         root.selected()
-        //     }
-        // }
+        Component.onCompleted: {
+            issue_list.fetch_issues()
+        }
     }
+    Repeater {
+        model: issue_list
 
-    // Card {
-    //     id: diningCard
-    //     anchors.verticalCenter: parent.verticalCenter
-    //     enabled: root.enabled
+        Issue {
+            id: issueItem
+            anchors.verticalCenter: parent.verticalCenter
+            enabled: root.enabled
 
-    //     room: Rooms.diningRoom
+            issue_id: model.id
 
-    //     Connections {
-    //         target: diningCard
-    //         onSelected: {
-    //             root.selectedRoom = diningCard.room
-    //             root.selected()
-    //         }
-    //     }
-    // }
+            //issue_type:
+            //var type = model.title.split("_")[0]
+            issue_title: model.title.replace(model.title.split("_")[0] + "_",
+                                             "")
+            achievment_rate: 0 //model.achievment
+            is_overdue: model.isoverdue
 
-    // Card {
-    //     id: kitchenCard
-    //     anchors.verticalCenter: parent.verticalCenter
-    //     enabled: root.enabled
-
-    //     room: Rooms.kitchenRoom
-
-    //     Connections {
-    //         target: kitchenCard
-    //         onSelected: {
-    //             root.selectedRoom = kitchenCard.room
-    //             root.selected()
-    //         }
-    //     }
-    // }
-
-    // Card {
-    //     id: kidsCard
-    //     anchors.verticalCenter: parent.verticalCenter
-    //     enabled: root.enabled
-
-    //     room: Rooms.kidsRoom
-
-    //     Connections {
-    //         target: kidsCard
-    //         onSelected: {
-    //             root.selectedRoom = kidsCard.room
-    //             root.selected()
-    //         }
-    //     }
-    // }
-
-    // Card {
-    //     id: kids2Card
-    //     anchors.verticalCenter: parent.verticalCenter
-    //     enabled: root.enabled
-
-    //     room: Rooms.kids2Room
-
-    //     Connections {
-    //         target: kids2Card
-    //         onSelected: {
-    //             root.selectedRoom = kids2Card.room
-    //             root.selected()
-    //         }
-    //     }
-    // }
-
-    // Card {
-    //     id: bedCard
-    //     anchors.verticalCenter: parent.verticalCenter
-    //     enabled: root.enabled
-
-    //     room: Rooms.bedRoom
-
-    //     Connections {
-    //         target: bedCard
-    //         onSelected: {
-    //             root.selectedRoom = bedCard.room
-    //             root.selected()
-    //         }
-    //     }
-    // }
+            deadline: model.deadline
+            issue_type: model.title.split("_")[0]
+            // Connections {
+            //     target: parent // Connections target을 root로 설정
+            //     function onSelected() {
+            //         parent.selectedRoom = issueItem.room // room 값을 전달
+            //         parent.selected() // 부모의 selected 신호 발생
+            //         console.log("Issue ID: " + issueItem.issue_id)
+            //         console.log("Issue Title: " + issueItem.issue_title)
+            //         console.log("Deadline: " + issueItem.deadline)
+            //     }
+            // }
+        }
+    }
 }

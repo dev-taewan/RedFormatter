@@ -2,13 +2,14 @@ import QtQuick 2.15
 import Thermo 1.0
 import ThermoConfiguration 1.0
 import Redformatter
+import Redmine
 
 Item {
     id: appWindow
     width: Theme.screenWidth
     height: Theme.screenHeight
 
-    property int selectedView: 0
+    property int selectedView: 1
 
     // BackgroundImage {
     //     anchors.fill: parent
@@ -57,7 +58,15 @@ Item {
             selectedView: appWindow.selectedView
             index: 0
         }
-
+        NewIssue {
+            id: newissue
+            anchors.fill: parent
+            anchors.bottomMargin: -Theme.bottomBarHeight // No BottomBar in the RoomView
+            visible: opacity > 0.01
+            currentRoom: places.currentRoom
+            selectedView: appWindow.selectedView
+            index: 1
+        }
         // RoomView {
         //     id: roomView
         //     anchors.fill: parent
