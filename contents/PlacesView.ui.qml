@@ -51,6 +51,7 @@ ThermoView {
                 function onSelected() {
                     root.currentRoom = cardRow.selectedRoom
                     root.showMain = false
+                    console('click')
                 }
                 // onSelected: {
                 //     root.currentRoom = cardRow.selectedRoom

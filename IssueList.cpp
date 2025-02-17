@@ -15,6 +15,7 @@ using namespace concurrency::streams;
 
 const std::string REDMINE_URL="";
 const std::string API_KEY="";
+
 IssueList::IssueList(QObject *parent):QAbstractListModel(parent) {}
 
 int IssueList::rowCount(const QModelIndex &parent) const

@@ -125,6 +125,8 @@ qt_add_qml_module(appRedformatter
          contents/ColorizedImage.qml
          contents/TopBar.qml
          QML_FILES contents/ProgressBar.qml
+         QML_FILES contents/NewIssue.ui.qml
+         QML_FILES contents/WriteIssue.ui.qml
 
 )
 

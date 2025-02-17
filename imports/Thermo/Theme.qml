@@ -24,7 +24,7 @@ import QtQuick
 QtObject {
     readonly property bool isBig: true
     readonly property int screenWidth: 800
-    readonly property int screenHeight: 480
+    readonly property int screenHeight: 720
     readonly property int topBarHeight: 84
     readonly property int topBarFontSize: 32
     readonly property int bottomBarHeight: 72

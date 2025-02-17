@@ -19,8 +19,8 @@ import Redformatter
 // }
 Window {
     visible: true
-    width: 720
-    height: 480
+    width: 800
+    height: 640
 
     Loader {
         id: blackBoxLoader

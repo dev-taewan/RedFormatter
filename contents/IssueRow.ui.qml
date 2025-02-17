@@ -53,7 +53,7 @@ Row {
             //var type = model.title.split("_")[0]
             issue_title: model.title.replace(model.title.split("_")[0] + "_",
                                              "")
-            achievment_rate: 0 //model.achievment
+            achievment_rate: 60 //model.achievment
             is_overdue: model.isoverdue
 
             deadline: model.deadline
