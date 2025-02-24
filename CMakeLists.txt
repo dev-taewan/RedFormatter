@@ -125,8 +125,9 @@ qt_add_qml_module(appRedformatter
          contents/ColorizedImage.qml
          contents/TopBar.qml
          QML_FILES contents/ProgressBar.qml
-         QML_FILES contents/NewIssue.ui.qml
-         QML_FILES contents/WriteIssue.ui.qml
+         QML_FILES contents/NewIssue.qml
+         QML_FILES contents/WriteIssue.qml
+         QML_FILES
 
 )
 
@@ -170,6 +171,9 @@ qt_add_qml_module(RedmineAPI
     QML_FILES IssueList.qml
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Redmine
     QML_FILES NewIssue.ui.qml
+    SOURCES IssueWorkTable.h IssueWorkTable.cpp
+    QML_FILES IssueEditer.qml
+    QML_FILES IssueWorkTable.qml
 )
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

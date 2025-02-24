@@ -19,13 +19,14 @@ Item {
         height: Theme.topBarHeight
 
         showBackButton: !places.showMain
-        title: places.currentRoom.name
+        title: "test" //places.currentRoom.name
 
         Connections {
             target: topBar
 
             function onBackClicked() {
                 places.showMain = true
+                //appWindow.selectedView = 0
             }
             function onSettingsClicked() {
                 languageDialog.triggerAnimation()
@@ -47,13 +48,21 @@ Item {
             visible: opacity > 0.01
             anchors.fill: parent
             showMain: true
-            Connections {
-                target: places
-                function onShowMainChanged() {
-                    appWindow.selectedView = !places.showMain ? 5 : 0
-                }
-            }
 
+            // Connections {
+            //     target: places
+            //     function onShowMainChanged() {
+            //         appWindow.selectedView = !places.showMain ? 5 : 0
+            //         console.log("onshow")
+            //     }
+            // }
+            // Connections {
+            //     target: places
+            //     function onSelected() {
+            //         appWindow.selectedView = 3
+            //         console.log("places")
+            //     }
+            // }
             selectedView: appWindow.selectedView
             index: 0
         }
@@ -67,7 +76,7 @@ Item {
             selectedView: appWindow.selectedView
             index: 1
         }
-        // RoomView {
+        // WriteIssue {
         //     id: roomView
         //     anchors.fill: parent
         //     anchors.bottomMargin: -Theme.bottomBarHeight // No BottomBar in the RoomView
@@ -75,7 +84,7 @@ Item {
         //     currentRoom: places.currentRoom
 
         //     selectedView: appWindow.selectedView
-        //     index: 5
+        //     index: 3
         // }
 
         // ScheduleView {

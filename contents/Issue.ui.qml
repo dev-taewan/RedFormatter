@@ -182,18 +182,39 @@ Item {
             Connections {
                 target: ta
                 function onClicked() {
+                    console.log("Issue ID11: " + issue_id)
                     root.selected()
                 }
             }
         }
+        WriteIssue {
+            width: 1280
+            height: 720
+            id: write_issue
+            visible: false
+            flags: Qt.Dialog | Qt.FramelessWindowHint // 항상 부모 위에 위치, 이동 불가
+            modality: Qt.ApplicationModal // 부모 창 제어 불가능
+            x: (Screen.width - width) / 2
+            y: (Screen.height - height) / 2
+            issue_id: root.issue_id
+            // IssueWorkTable {
+            //     id: issue_work_table
+            //     Component.onCompleted: {
+            //         issue_work_table.GetCurrentWorkTable(7251)
+            //     }
+            // }
+        }
+
         Connections {
             target: root // Connections target을 root로 설정
             function onSelected() {
                 //root.selectedRoom = issueItem.room // room 값을 전달
                 //root.selected() // 부모의 selected 신호 발생
-                console.log("Issue ID: " + issue_id)
-                console.log("Issue Title: " + issue_title)
-                console.log("Deadline: " + deadline)
+                // console.log("Issue ID: " + issue_id)
+                // console.log("Issue Title: " + issue_title)
+                // console.log("Deadline: " + deadline)
+                //console.log("ccccc")
+                write_issue.visible = true
             }
         }
     }

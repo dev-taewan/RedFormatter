@@ -26,7 +26,7 @@ import Redformatter
 
 ThermoView {
     id: root
-
+    signal selected
     property bool showMain
     property Room currentRoom: Rooms.livingRoom
     property int cardSizeWithSpacing: Theme.cardRowSpacing + Theme.cardWidth
@@ -51,7 +51,8 @@ ThermoView {
                 function onSelected() {
                     root.currentRoom = cardRow.selectedRoom
                     root.showMain = false
-                    console('click')
+                    //root.selected()
+                    console.log('click')
                 }
                 // onSelected: {
                 //     root.currentRoom = cardRow.selectedRoom

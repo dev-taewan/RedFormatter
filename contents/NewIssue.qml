@@ -26,7 +26,7 @@ import Redformatter
 **
 ******************************************************************************/
 ThermoView {
-    id: root2
+    id: root
 
     property bool showMain
     property Room currentRoom: Rooms.livingRoom
@@ -34,11 +34,11 @@ ThermoView {
     property int pageCount: 6
 
     visible: true
-    Rectangle {
-        width: parent.width
-        height: parent.height
-        color: "#f5f5f5"
-        radius: 10
+    //Rectangle {
+        // width: parent.width
+        // height: parent.height
+        //color: "#f5f5f5"
+        //radius: 10
         ScrollView {
             anchors.centerIn: parent
 
@@ -200,5 +200,5 @@ ThermoView {
         //     height: 13
         //     value: 1
         // }
-    }
+   // }
 }

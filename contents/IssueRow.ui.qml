@@ -39,6 +39,12 @@ Row {
             issue_list.fetch_issues()
         }
     }
+    // IssueWorkTable {
+    //     id: issue_work_table
+    //     Component.onCompleted: {
+    //         issue_work_table.GetCurrentWorkTable(7251)
+    //     }
+    // }
     Repeater {
         model: issue_list
 
@@ -58,16 +64,15 @@ Row {
 
             deadline: model.deadline
             issue_type: model.title.split("_")[0]
-            // Connections {
-            //     target: parent // Connections target을 root로 설정
-            //     function onSelected() {
-            //         parent.selectedRoom = issueItem.room // room 값을 전달
-            //         parent.selected() // 부모의 selected 신호 발생
-            //         console.log("Issue ID: " + issueItem.issue_id)
-            //         console.log("Issue Title: " + issueItem.issue_title)
-            //         console.log("Deadline: " + issueItem.deadline)
-            //     }
-            // }
+            Connections {
+                target: issueItem // Connections target을 root로 설정
+                function onSelected() {
+
+                    root.selectedRoom = issueItem.room // room 값을 전달
+                    //root.selected() // 부모의 selected 신호 발생
+                    console.log("issue rows...")
+                }
+            }
         }
     }
 }
