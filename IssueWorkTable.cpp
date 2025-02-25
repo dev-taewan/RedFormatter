@@ -124,11 +124,11 @@ void IssueWorkTable::GetCurrentWorkTable(QString issue_id)
                                   for(int column=0;column<parsedData.size()/7;column++)
                                   {
                                       WorkTableItem worktable_row_item;
-                                      worktable_row_item.work_id=parsedData[column*7+0];
+                                      worktable_row_item.work_id=parsedData[column*7+0].replace("=.","");
                                       worktable_row_item.work_title=parsedData[column*7+1];
                                       worktable_row_item.work_type=parsedData[column*7+2];
                                       worktable_row_item.deadline=parsedData[column*7+3];
-                                      worktable_row_item.achievment_rate=parsedData[column*7+4];
+                                      worktable_row_item.achievment_rate=parsedData[column*7+4].split("%")[0];
                                       worktable_row_item.result_output=parsedData[column*7+5];
                                       worktable_row_item.etc_issue=parsedData[column*7+6];
                                       workTableRows.append(worktable_row_item);
@@ -172,15 +172,6 @@ void IssueWorkTable::addItem(const QString work_id,const QString work_title,cons
 }
 QHash<int, QByteArray> IssueWorkTable::roleNames() const
 {
-
-    // ItemRoles{
-    //     IdRole=Qt::UserRole+1,
-    //         WorkTitleRole,
-    //         WorkTypeRole,
-    //         DeadLineRole,
-    //         AchievmentRateRole,
-    //         ResultOutputRole,
-    //         EtcIssueRole,
     QHash<int,QByteArray> roles;
     roles[IdRole]="id";
     roles[WorkTitleRole]="title";

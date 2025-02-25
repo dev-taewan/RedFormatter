@@ -194,8 +194,8 @@ Item {
             visible: false
             flags: Qt.Dialog | Qt.FramelessWindowHint // 항상 부모 위에 위치, 이동 불가
             modality: Qt.ApplicationModal // 부모 창 제어 불가능
-            x: (Screen.width - width) / 2
-            y: (Screen.height - height) / 2
+            // x: (Screen.width - width) / 2
+            // y: (Screen.height - height) / 2
             issue_id: root.issue_id
             // IssueWorkTable {
             //     id: issue_work_table
