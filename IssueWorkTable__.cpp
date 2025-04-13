@@ -1,4 +1,4 @@
-#include "IssueWorkTable.h"
+#include "IssueWorkTable__.h"
 #include <vector>
 #include <string>
 #include <QCoreApplication>
@@ -156,6 +156,59 @@ void IssueWorkTable::GetCurrentWorkTable(QString issue_id)
         std::cerr <<" Issue List Error: " << e.what() << '\n';
     }
 }
+void IssueWorkTable::updateItem(int index, const QString &value,int role) {
+    std::cout<<"update cpp call "<< index<< "role: "<<role<<std::endl;
+    if (index < 0 || index >= m_items.size())
+        return;
+    switch(role){
+    case IdRole:
+        m_items[index].work_id=value;
+        break;
+    case WorkTitleRole:
+        std::cout<<"role title "<<value.toStdString()<<std::endl;
+
+        m_items[index].work_title=value;
+        break;
+    case WorkTypeRole:
+        std::cout<<"role update "<<value.toStdString()<<std::endl;
+        m_items[index].work_type=value;
+        break;
+    case AchievmentRateRole:
+        m_items[index].achievment_rate=value;
+        break;
+    case DeadLineRole:
+        m_items[index].deadline=value;
+        break;
+    case ResultOutputRole:
+        m_items[index].result_output=value;
+        break;
+    case EtcIssueRole:
+        m_items[index].etc_issue=value;
+        break;
+    }
+    emit dataChanged(this->index(index), this->index(index), {role});
+}
+
+// 🔥 QAbstractListModel 표준 방식으로 데이터 수정 가능하게 setData 오버라이드
+bool IssueWorkTable::setData(const QModelIndex &index, const QVariant &value, int role) {
+    if (!index.isValid() || index.row() >= m_items.size())
+        return false;
+
+    WorkTableItem &item = m_items[index.row()];
+
+    if (role == WorkTypeRole) {
+        item.work_type = value.toString();
+        emit dataChanged(index, index, {role});
+        return true;
+    }
+
+    return false;
+}
+
+QList<WorkTableItem> IssueWorkTable::getWorkTableList()
+{
+    return m_items;
+}
 void IssueWorkTable::addItem(const QString work_id,const QString work_title,const QString work_type,const QString deadline ,const QString achievment_rate,const QString result_output,const QString etc_issue)
 {
     beginInsertRows(QModelIndex(),rowCount(),rowCount());
@@ -182,3 +235,92 @@ QHash<int, QByteArray> IssueWorkTable::roleNames() const
     roles[EtcIssueRole]="etc";
     return roles;
 }
+// #include <cpprest/http_client.h>
+// #include <cpprest/filestream.h>
+// #include <cpprest/json.h>
+// #include <iostream>
+// #include <memory>
+
+// using namespace web;
+// using namespace web::http;
+// using namespace web::http::client;
+
+// int main() {
+//     // Redmine 서버 URL (사용자의 실제 서버 URL로 변경)
+//     utility::string_t redmine_url = U("http://your-redmine-server");
+
+//     // Redmine API 키 (사용자의 실제 API 키로 변경)
+//     utility::string_t api_key = U("your-api-key");
+
+//     // 기존 이슈 ID (실제 이슈 ID로 변경)
+//     int issue_id = 123;
+
+//     // 업로드할 이미지 파일 경로 (실제 파일 경로로 변경)
+//     utility::string_t file_path = U("path/to/image.png");
+
+//     // 파일 열기
+//     auto file_stream = std::make_shared<concurrency::streams::istream>();
+//     pplx::task<void> open_task = concurrency::streams::fstream::open_istream(file_path)
+//                                      .then([=](concurrency::streams::istream stream) {
+//                                          *file_stream = stream;
+//                                      });
+//     open_task.wait();
+
+//     if (!file_stream->is_open()) {
+//         std::cout << "파일을 열지 못했습니다." << std::endl;
+//         return 1;
+//     }
+
+//     // HTTP 클라이언트 생성
+//     http_client client(redmine_url);
+
+//     // 1. 파일 업로드 요청
+//     http_request upload_request(methods::POST);
+//     upload_request.set_request_uri(U("/uploads.json?filename=image.png"));
+//     upload_request.headers().add(U("X-Redmine-API-Key"), api_key);
+//     upload_request.headers().set_content_type(U("application/octet-stream"));
+//     upload_request.set_body(*file_stream);
+
+//     http_response upload_response = client.request(upload_request).get();
+
+//     if (upload_response.status_code() == status_codes::Created) {
+//         json::value upload_json = upload_response.extract_json().get();
+//         if (upload_json.has_field(U("upload")) && upload_json[U("upload")].has_field(U("token"))) {
+//             utility::string_t token = upload_json[U("upload")][U("token")].as_string();
+
+//             // 2. 이슈 업데이트 요청
+//             http_request update_request(methods::PUT);
+//             update_request.set_request_uri(U("/issues/") + utility::conversions::to_string_t(std::to_string(issue_id)) + U(".json"));
+//             update_request.headers().add(U("X-Redmine-API-Key"), api_key);
+//             update_request.headers().set_content_type(U("application/json"));
+
+//             // JSON 본문 생성
+//             json::value update_body;
+//             json::value issue;
+//             json::value uploads = json::value::array();
+//             json::value upload;
+//             upload[U("token")] = json::value::string(token);
+//             upload[U("filename")] = json::value::string(U("image.png"));
+//             upload[U("content_type")] = json::value::string(U("image/png"));
+//             uploads[0] = upload;
+//             issue[U("uploads")] = uploads;
+//             update_body[U("issue")] = issue;
+
+//             update_request.set_body(update_body);
+
+//             http_response update_response = client.request(update_request).get();
+
+//             if (update_response.status_code() == status_codes::OK) {
+//                 std::cout << "이미지가 이슈에 성공적으로 첨부되었습니다. Journals에서 확인 가능합니다." << std::endl;
+//             } else {
+//                 std::cout << "이슈 업데이트 실패. 상태 코드: " << update_response.status_code() << std::endl;
+//             }
+//         } else {
+//             std::cout << "업로드 토큰을 찾을 수 없습니다." << std::endl;
+//         }
+//     } else {
+//         std::cout << "파일 업로드 실패. 상태 코드: " << upload_response.status_code() << std::endl;
+//     }
+
+//     return 0;
+// }

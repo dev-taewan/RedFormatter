@@ -66,16 +66,16 @@ Item {
             selectedView: appWindow.selectedView
             index: 0
         }
-        NewIssue {
-            id: newissue
-            anchors.fill: parent
-            anchors.bottom: bottomBar.top
-            anchors.bottomMargin: -Theme.bottomBarHeight // No BottomBar in the RoomView
-            visible: opacity > 0.01
-            currentRoom: places.currentRoom
-            selectedView: appWindow.selectedView
-            index: 1
-        }
+        // NewIssue {
+        //     id: newissue
+        //     anchors.fill: parent
+        //     anchors.bottom: bottomBar.top
+        //     anchors.bottomMargin: -Theme.bottomBarHeight // No BottomBar in the RoomView
+        //     visible: opacity > 0.01
+        //     currentRoom: places.currentRoom
+        //     selectedView: appWindow.selectedView
+        //     index: 1
+        // }
         // WriteIssue {
         //     id: roomView
         //     anchors.fill: parent

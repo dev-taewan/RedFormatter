@@ -121,7 +121,7 @@ Item {
             }
         }
 
-        ProgressBar {
+        WaveProgressBar {
             //진행률 표시
             id: progressbar
             rangeValue: achievment_rate
@@ -187,7 +187,7 @@ Item {
                 }
             }
         }
-        WriteIssue {
+        IssueMainView {
             width: 1280
             height: 720
             id: write_issue

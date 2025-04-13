@@ -22,6 +22,8 @@ qt_add_resources(appRedformatter "assets"
     PREFIX "/"
     FILES
                 assets/qt-logo.png
+                assets/Redmine_logo_v1.png
+                assets/main_logo.png
                 assets/JAPAN.png
                 assets/temp-down-pressed.png
                 assets/switch-handle.png
@@ -124,10 +126,14 @@ qt_add_qml_module(appRedformatter
          contents/PlacesDotIndicator.ui.qml
          contents/ColorizedImage.qml
          contents/TopBar.qml
-         QML_FILES contents/ProgressBar.qml
+         QML_FILES contents/WaveProgressBar.qml
          QML_FILES contents/NewIssue.qml
          QML_FILES contents/WriteIssue.qml
          QML_FILES
+         QML_FILES contents/TodoWorkPlan.qml
+         QML_FILES contents/WorkDetailInfo.qml
+         QML_FILES contents/IssueWriterBottomBar.qml
+         QML_FILES contents/IssueMainView.ui.qml
 
 )
 
@@ -171,9 +177,14 @@ qt_add_qml_module(RedmineAPI
     QML_FILES IssueList.qml
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Redmine
     QML_FILES NewIssue.ui.qml
-    SOURCES IssueWorkTable.h IssueWorkTable.cpp
+    SOURCES IssueWorkTable__.h IssueWorkTable__.cpp
     QML_FILES IssueEditer.qml
-    QML_FILES IssueWorkTable.qml
+    QML_FILES IssueWorkTable__.qml
+    SOURCES TreeModel.h TreeModel.cpp
+    SOURCES TreeItem.h TreeItem.cpp
+    QML_FILES
+    SOURCES IssueManager.h IssueManager.cpp
+    QML_FILES IssueModel.qml
 )
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

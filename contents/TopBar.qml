@@ -115,14 +115,26 @@ Item {
         }
     }
 
-    ColorizedImage {
-        id: qtLogo
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-        source: "qrc:/assets/qt-logo.png"
-        color: ColorStyle.greyDark4
+    // ColorizedImage {
+    //     id: qtLogo
+    //     height:parent.height
+    //     anchors.verticalCenter: parent.verticalCenter
+    //     anchors.horizontalCenter: parent.horizontalCenter
+    //     source: "qrc:/assets/Redmine_logo_v1.png"
+    //     //color:"white"
+    //     //color: ColorStyle.greyDark4
+    // }
+    Image {
+        id: logo
+        source: "qrc:/assets/main_logo.png"
+        //sourceSize: Qt.size(root.width, root.height)
+            height:parent.height*0.9
+            width:height*3
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+        mipmap: true
+        visible: true
     }
-
     // Row {
     //     height: parent.height
     //     anchors.right: parent.right
