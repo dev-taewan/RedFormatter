@@ -63,7 +63,7 @@ Window {
             //todoworkplan.todayplan.fileModelTest()
         }
     }
-    WriteIssue {
+    writeIssuetest {
         id: todoworkplan
         issue_id: appWindow.issue_id
         //width: 300
@@ -95,7 +95,7 @@ Window {
         //anchors.bottom: bottomBar.top
         anchors.bottomMargin: -Theme.bottomBarHeight
         //property int currentViewIndex: 0
-        TodoWorkPlan {
+        TodoWorkPlantest {
             id: todaywork
             anchors.fill: parent
             //width: 1280
@@ -117,7 +117,7 @@ Window {
         //anchors.bottom: bottomBar.top
         anchors.bottomMargin: -Theme.bottomBarHeight
         //property int currentViewIndex: 0
-        TodoWorkPlan {
+        TodoWorkPlantest {
             id: nextwork
             anchors.fill: parent
             enabled: appWindow.selectedView === 1

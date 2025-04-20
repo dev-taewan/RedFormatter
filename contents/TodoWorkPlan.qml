@@ -147,7 +147,33 @@ ThermoView {
                                                         // anchors.left:detailPanel.left
                                                         // anchors.right:detailPanel.right
                                                         title: " 하위 업무"
-                                                        ex_contentItem: WorkDetailInfo {
+                                                        // ex_contentItem: WorkDetailInfo {
+                                                        //     id: subTaskManager
+                                                        //     title:model.title
+                                                        //     anchors.fill:detailPanel
+                                                        //     width:1280
+                                                        //     //height:50
+                                                        //     //visible: contentArea.visible // 오류 발생 원인: contentArea가 뒤에 정의됨
+                                                        //     Binding { // Binding을 사용하여 contentArea가 생성된 후 visible 바인딩 평가
+                                                        //         target: subTaskManager
+                                                        //         property: "visible"
+                                                        //         //value: contentArea.visible
+                                                        //     }
+                                                        //     //model: ListModel { id: subTaskModel}
+                                                        //     // onTaskAdded: function(text) {
+                                                        //     //     console.log("add")
+                                                        //     //     subTaskModel.append({description: text, completed: false})
+                                                        //     // }
+                                                        //     Component.onCompleted:{
+
+                                                        //         detailPanel.treeModel=subTaskManager.treeModel
+                                                        //     }
+                                                        //     // onGetTreeitems:function(){
+                                                        //     //     subTaskManager.treeModel.getAllData()
+                                                        //     // }
+
+                                                        // }
+                                                        ex_contentItem: WorkDetailInfo2 {
                                                             id: subTaskManager
                                                             title:model.title
                                                             anchors.fill:detailPanel
@@ -166,7 +192,7 @@ ThermoView {
                                                             // }
                                                             Component.onCompleted:{
 
-                                                                detailPanel.treeModel=subTaskManager.treeModel
+                                                                //detailPanel.treeModel=subTaskManager.treeModel
                                                             }
                                                             // onGetTreeitems:function(){
                                                             //     subTaskManager.treeModel.getAllData()

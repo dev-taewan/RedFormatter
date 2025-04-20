@@ -134,6 +134,14 @@ qt_add_qml_module(appRedformatter
          QML_FILES contents/WorkDetailInfo.qml
          QML_FILES contents/IssueWriterBottomBar.qml
          QML_FILES contents/IssueMainView.ui.qml
+         QML_FILES contents/CollapsibleSection.qml
+         QML_FILES contents/ContentBlock.qml
+         QML_FILES contents/CustomDateInput.qml
+         QML_FILES contents/SectionComponent.qml
+         QML_FILES contents/SubSectionComponent.qml
+         QML_FILES contents/WorkDetailInfo2.qml
+         QML_FILES contents/writeissuetest.qml
+         QML_FILES contents/TodoWorkPlantest.qml
 
 )
 
